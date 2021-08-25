@@ -66,7 +66,7 @@ public class Main {
         }
     }
 
-    private  static ArrayList<Employee> parseXML(String pathName) throws ParserConfigurationException, IOException, SAXException {
+    private  static List<Employee> parseXML(String pathName) throws ParserConfigurationException, IOException, SAXException {
         ArrayList<Employee> employees = new ArrayList<>();
         Employee employee;
         long id = 0;
@@ -90,12 +90,12 @@ public class Main {
                     Node node1 = nodeList1.item(j);
                     if (Node.ELEMENT_NODE == node1.getNodeType()) {
                         Element element = (Element) node1;
-                        NodeList nodeList2 = element.getChildNodes();
-                        if (node1.getNodeName().equals("id")) id = Integer.parseInt(nodeList2.item(0).getNodeValue());
-                        if (node1.getNodeName().equals("firstName")) firstName = nodeList2.item(0).getNodeValue();
-                        if (node1.getNodeName().equals("lastName")) lastName = nodeList2.item(0).getNodeValue();
-                        if (node1.getNodeName().equals("country")) country = nodeList2.item(0).getNodeValue();
-                        if (node1.getNodeName().equals("age")) age = Integer.parseInt(nodeList2.item(0).getNodeValue());
+                        NodeList nodeElementList = element.getChildNodes();
+                        if (node1.getNodeName().equals("id")) id = Integer.parseInt(nodeElementList.item(0).getNodeValue());
+                        if (node1.getNodeName().equals("firstName")) firstName = nodeElementList.item(0).getNodeValue();
+                        if (node1.getNodeName().equals("lastName")) lastName = nodeElementList.item(0).getNodeValue();
+                        if (node1.getNodeName().equals("country")) country = nodeElementList.item(0).getNodeValue();
+                        if (node1.getNodeName().equals("age")) age = Integer.parseInt(nodeElementList.item(0).getNodeValue());
                     }
                 }
                 employee = new Employee(id, firstName, lastName, country, age);
@@ -118,7 +118,7 @@ public class Main {
         return null;
     }
 
-    private static ArrayList<Employee> jsonToList(String json) {
+    private static List<Employee> jsonToList(String json) {
         JSONParser parser = new JSONParser();
         ArrayList<Employee> list = new ArrayList<>();
         JSONArray jsonArray = null;
